@@ -60,7 +60,18 @@ filename = find_exe(version)
 data = None
 with open(filename,"rb") as f:
     data=bytearray(f.read())
+    print("Data read successfully")
+
+with open("Unity.exe.backup","wb") as f:
+    f.write(data)
+    print("Backup created successfully")
+
+
 data=data.replace(hexdata.before, hexdata.after)
 with open("Unity.exe","wb") as f:
     f.write(data)
-print("Copy \"" + path.abspath("Unity.exe") + "\" to \"" + filename +"\"")
+    print("Data written successfully")
+
+print("\nModified Unity.exe can be found in this directory")
+print("\tCopy \"" + path.abspath("Unity.exe") + "\"\n\tTo \"" + filename +"\"")
+print("To finish installation")
