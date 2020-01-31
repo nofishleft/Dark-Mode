@@ -6,3 +6,5 @@
 * Copy the Unity.exe in the script directory to the destination specified in the console.
 
 ![Console Image](https://i.imgur.com/eDaKjtD.png)
+
+![Dark Mode Image](https://i.imgur.com/oIGsIUG.png)
