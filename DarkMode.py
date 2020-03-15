@@ -22,8 +22,8 @@ def find_exe(version):
     ex = re.compile(version.replace(".", r"\.") + r"\.[0-9]{1,2}[abf][0-9]")
 
     filepath = ""
-    progfile = "C:\\Program Files\\Unity\\"
-    progfile86 = "C:\\Program Files (x86)\\Unity\\"
+    progfile = "C:/Program Files/Unity/"
+    progfile86 = "C:/Program Files (x86)/Unity/"
 
     if path.exists(progfile86):
         filepath = progfile86
@@ -31,12 +31,12 @@ def find_exe(version):
     if path.exists(progfile):
         filepath = progfile
 
-    for (_, dirnames, _) in walk(filepath):
+    for (root, dirnames, _) in walk(filepath):
         for dirname in dirnames:
             match = ex.match(dirname)
+            print(dirname)
             if match != None:
-                return filepath + match.string + "\\Editor\\Unity.exe"
-        break
+                return root.replace("\\", "/") + "/" + dirname + "/Editor/Unity.exe"
     
     print("Could not find Unity.exe")
     exit(0)
@@ -72,6 +72,6 @@ with open("Unity.exe","wb") as f:
     f.write(data)
     print("Data written successfully")
 
-print("\nModified Unity.exe can be found in this directory")
-print("\tCopy \"" + path.abspath("Unity.exe") + "\"\n\tTo \"" + filename +"\"")
+print("\nModified Unity.exe can be found in the same directory as this script")
+print("\tCopy \"" + path.abspath("Unity.exe").replace("\\", "/")  + "\"\n\tTo \"" + filename +"\"")
 print("To finish installation")
